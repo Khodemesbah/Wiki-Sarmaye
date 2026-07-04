@@ -132,7 +132,66 @@ const sectionObserver = new IntersectionObserver(
   },
   { rootMargin: "-40% 0px -55% 0px" }
 );
-["methods", "compare", "advice"].forEach((id) => {
+["methods", "compare", "tools", "advice", "glossary"].forEach((id) => {
   const el = document.getElementById(id);
   if (el) sectionObserver.observe(el);
+});
+
+// ۹) ماشین‌حساب بازدهی واقعی
+// نرخ‌های اسمی سالانه (درصد) — فرض‌های ساده‌شده، اینجا قابل ویرایش
+const nominalRates = {
+  "سپرده بانکی": 20.5,
+  "درآمد ثابت": 30,
+  "طلا / صندوق طلا": 40,
+  "دلار": 35,
+  "صندوق سهامی / شاخصی": 45,
+  "مسکن": 35,
+};
+const faNumber = new Intl.NumberFormat("fa-IR", { maximumFractionDigits: 1 });
+document.getElementById("calcRun").addEventListener("click", () => {
+  const p = Number(document.getElementById("calcAmount").value) || 0;
+  const n = Number(document.getElementById("calcYears").value) || 0;
+  const inf = (Number(document.getElementById("calcInflation").value) || 0) / 100;
+  const box = document.getElementById("calcResults");
+  box.innerHTML = "";
+  const rows = Object.entries(nominalRates).map(([name, r]) => ({
+    name,
+    real: p * Math.pow((1 + r / 100) / (1 + inf), n), // ارزش به قیمت امروز
+  }));
+  const maxVal = Math.max.apply(null, rows.map((x) => x.real));
+  rows.sort((a, b) => b.real - a.real).forEach((x) => {
+    const row = document.createElement("div");
+    row.className = "calc-row";
+    const cls = x.real >= p ? "good" : "bad";
+    row.innerHTML =
+      "<span>" + x.name + "</span>" +
+      '<span class="calc-bar"><i style="width:' + (x.real / maxVal) * 100 + '%"></i></span>' +
+      '<span class="calc-val ' + cls + '">' + faNumber.format(x.real) + "</span>";
+    box.appendChild(row);
+  });
+  box.insertAdjacentHTML(
+    "beforeend",
+    '<p class="tool-note">اعداد به میلیون تومان و به قیمت امروز (پس از کسر تورم) هستند؛ سبز = حفظ یا رشد قدرت خرید، قرمز = عقب‌ماندن از تورم.</p>'
+  );
+});
+
+// ۱۰) کوییز پروفایل ریسک
+document.getElementById("quizRun").addEventListener("click", () => {
+  let total = 0;
+  let answered = 0;
+  for (let i = 1; i <= 5; i++) {
+    const sel = document.querySelector('input[name="q' + i + '"]:checked');
+    if (sel) {
+      total += Number(sel.value);
+      answered++;
+    }
+  }
+  const out = document.getElementById("quizResult");
+  if (answered < 5) {
+    out.textContent = "به هر ۵ سؤال پاسخ دهید.";
+    return;
+  }
+  const profile = total <= 8 ? "محافظه‌کار" : total <= 12 ? "متعادل" : "تهاجمی";
+  out.innerHTML =
+    'پروفایل شما: <strong>' + profile + '</strong> — ترکیب پیشنهادی‌اش را در <a href="#advice">بخش پیشنهادها</a> ببینید.';
 });
