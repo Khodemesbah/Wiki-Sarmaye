@@ -188,7 +188,7 @@ html[data-theme="dark"] #themeToggle .moon { display: none; }
 /* ===== جدول مقایسه ===== */
 .table-wrap {
   overflow-x: auto; border-radius: var(--radius);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 24px var(--shadow);
 }
 table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 0.92rem; }
 th, td { padding: 14px 16px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
@@ -280,3 +280,21 @@ footer {
 }
 .to-top.show { opacity: 1; visibility: visible; transform: none; }
 .to-top svg { width: 20px; height: 20px; }
+
+/* ===== نسخه ۶ ===== */
+/* ستون «روش» هنگام اسکرول افقی جدول ثابت می‌ماند */
+th:first-child, td:first-child {
+  position: sticky; right: 0; z-index: 1;
+  background: var(--surface);
+  box-shadow: -8px 0 8px -8px var(--shadow);
+}
+thead th:first-child { background: var(--thead); z-index: 2; }
+tbody tr:hover td:first-child { background: var(--alt); }
+
+/* قفل اسکرول مطمئن در iOS وقتی منو باز است */
+body.menu-open { position: fixed; width: 100%; overflow: hidden; }
+
+/* فوکوس کیبورد برای دسترس‌پذیری */
+.icon-btn:focus-visible, .cta:focus-visible, .to-top:focus-visible, .nav-links a:focus-visible {
+  outline: 2px solid var(--blue); outline-offset: 3px;
+}
