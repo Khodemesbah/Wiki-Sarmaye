@@ -58,20 +58,34 @@ document.getElementById("themeToggle").addEventListener("click", () => {
   localStorage.setItem("theme", next); // انتخاب کاربر ذخیره می‌شود
 });
 
-// ۵) منوی همبرگری
+// ۵) منوی همبرگری — با قفل اسکرول مطمئن برای iOS
 const burger = document.getElementById("burger");
 const menu = document.getElementById("menu");
+let scrollLockY = 0;
+function lockScroll(lock) {
+  if (lock) {
+    scrollLockY = window.scrollY;
+    document.body.classList.add("menu-open");
+    document.body.style.top = -scrollLockY + "px";
+  } else {
+    document.body.classList.remove("menu-open");
+    document.body.style.top = "";
+    window.scrollTo(0, scrollLockY); // بازگشت به همان نقطه قبل از بازشدن منو
+  }
+}
 burger.addEventListener("click", () => {
   const isOpen = burger.classList.toggle("open");
+  burger.setAttribute("aria-expanded", String(isOpen));
   menu.classList.toggle("open");
-  document.body.style.overflow = isOpen ? "hidden" : ""; // قفل اسکرول پشت منوی تمام‌صفحه
+  lockScroll(isOpen);
 });
 // با کلیک روی هر لینک، منو بسته می‌شود
 menu.querySelectorAll("a").forEach((a) => {
   a.addEventListener("click", () => {
     burger.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
     menu.classList.remove("open");
-    document.body.style.overflow = "";
+    lockScroll(false);
   });
 });
 
