@@ -62,13 +62,63 @@ document.getElementById("themeToggle").addEventListener("click", () => {
 const burger = document.getElementById("burger");
 const menu = document.getElementById("menu");
 burger.addEventListener("click", () => {
-  burger.classList.toggle("open");
+  const isOpen = burger.classList.toggle("open");
   menu.classList.toggle("open");
+  document.body.style.overflow = isOpen ? "hidden" : ""; // قفل اسکرول پشت منوی تمام‌صفحه
 });
 // با کلیک روی هر لینک، منو بسته می‌شود
 menu.querySelectorAll("a").forEach((a) => {
   a.addEventListener("click", () => {
     burger.classList.remove("open");
     menu.classList.remove("open");
+    document.body.style.overflow = "";
   });
+});
+
+// ۶) هماهنگی رنگ نوار وضعیت iOS با تم
+const metaTheme = document.getElementById("metaTheme");
+function syncMetaTheme() {
+  metaTheme.setAttribute(
+    "content",
+    root.getAttribute("data-theme") === "dark" ? "#000000" : "#ffffff"
+  );
+}
+syncMetaTheme();
+document.getElementById("themeToggle").addEventListener("click", syncMetaTheme);
+
+// ۷) نوار پیشرفت مطالعه + دکمه بازگشت به بالا
+const progress = document.getElementById("progress");
+const toTop = document.getElementById("toTop");
+window.addEventListener(
+  "scroll",
+  () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (window.scrollY / max) * 100 + "%";
+    toTop.classList.toggle("show", window.scrollY > window.innerHeight);
+  },
+  { passive: true }
+);
+toTop.addEventListener("click", () =>
+  window.scrollTo({ top: 0, behavior: "smooth" })
+);
+
+// ۸) هایلایت بخش فعال در منو
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        menu.querySelectorAll("a").forEach((a) => {
+          a.classList.toggle(
+            "active",
+            a.getAttribute("href") === "#" + entry.target.id
+          );
+        });
+      }
+    });
+  },
+  { rootMargin: "-40% 0px -55% 0px" }
+);
+["methods", "compare", "advice"].forEach((id) => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
 });
