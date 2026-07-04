@@ -42,3 +42,33 @@ window.addEventListener(
   },
   { passive: true }
 );
+
+// ۴) دارک مود به سبک اپل
+const root = document.documentElement;
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  root.setAttribute("data-theme", savedTheme);
+} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  // اگر کاربر انتخابی نکرده باشد، از حالت سیستم پیروی می‌کند
+  root.setAttribute("data-theme", "dark");
+}
+document.getElementById("themeToggle").addEventListener("click", () => {
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next); // انتخاب کاربر ذخیره می‌شود
+});
+
+// ۵) منوی همبرگری
+const burger = document.getElementById("burger");
+const menu = document.getElementById("menu");
+burger.addEventListener("click", () => {
+  burger.classList.toggle("open");
+  menu.classList.toggle("open");
+});
+// با کلیک روی هر لینک، منو بسته می‌شود
+menu.querySelectorAll("a").forEach((a) => {
+  a.addEventListener("click", () => {
+    burger.classList.remove("open");
+    menu.classList.remove("open");
+  });
+});
