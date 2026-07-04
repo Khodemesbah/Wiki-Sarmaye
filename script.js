@@ -44,8 +44,15 @@ window.addEventListener(
 );
 
 // ۴) دارک مود به سبک اپل
+// localStorage در بعضی حالت‌های Private خطا می‌دهد؛ همه دسترسی‌ها امن شده‌اند
+function storeSet(key, val) {
+  try { localStorage.setItem(key, val); } catch (e) {}
+}
+function storeGet(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
 const root = document.documentElement;
-const savedTheme = localStorage.getItem("theme");
+const savedTheme = storeGet("theme");
 if (savedTheme) {
   root.setAttribute("data-theme", savedTheme);
 } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -55,7 +62,7 @@ if (savedTheme) {
 document.getElementById("themeToggle").addEventListener("click", () => {
   const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
   root.setAttribute("data-theme", next);
-  localStorage.setItem("theme", next); // انتخاب کاربر ذخیره می‌شود
+  storeSet("theme", next); // انتخاب کاربر ذخیره می‌شود
 });
 
 // ۵) منوی همبرگری — با قفل اسکرول مطمئن برای iOS
@@ -132,7 +139,7 @@ const sectionObserver = new IntersectionObserver(
   },
   { rootMargin: "-40% 0px -55% 0px" }
 );
-["methods", "compare", "tools", "advice", "glossary"].forEach((id) => {
+["methods", "compare", "tools", "advice", "scenario", "mistakes", "glossary"].forEach((id) => {
   const el = document.getElementById(id);
   if (el) sectionObserver.observe(el);
 });
@@ -192,6 +199,58 @@ document.getElementById("quizRun").addEventListener("click", () => {
     return;
   }
   const profile = total <= 8 ? "محافظه‌کار" : total <= 12 ? "متعادل" : "تهاجمی";
+  storeSet("riskProfile", profile); // برای بازدیدهای بعدی ذخیره می‌شود
   out.innerHTML =
     'پروفایل شما: <strong>' + profile + '</strong> — ترکیب پیشنهادی‌اش را در <a href="#advice">بخش پیشنهادها</a> ببینید.';
 });
+
+// ۱۱) بنر پروفایل ذخیره‌شده — در بازدید بعدی نمایش داده می‌شود
+const profileBanner = document.getElementById("profileBanner");
+const savedProfile = storeGet("riskProfile");
+let bannerClosed = null;
+try { bannerClosed = sessionStorage.getItem("bannerClosed"); } catch (e) {}
+if (savedProfile && bannerClosed !== "1") {
+  document.getElementById("profileBannerText").textContent =
+    "پروفایل ریسک شما: " + savedProfile;
+  profileBanner.hidden = false;
+}
+document.getElementById("profileBannerClose").addEventListener("click", () => {
+  profileBanner.hidden = true;
+  try { sessionStorage.setItem("bannerClosed", "1"); } catch (e) {} // تا پایان همین بازدید بسته می‌ماند
+});
+
+// ۱۲) مقایسه‌گر رو در رو — داده‌ها همان جدول مقایسه است
+const duelData = {
+  "سپرده بانکی": { "پوشش تورم": "ضعیف", "بازدهی ذاتی": "سود ثابت", "نوسان / ریسک": "تقریباً صفر", "نقدشوندگی": "بالا", "حداقل سرمایه": "کم", "افق مناسب": "کوتاه" },
+  "درآمد ثابت": { "پوشش تورم": "متوسط", "بازدهی ذاتی": "سود روزشمار", "نوسان / ریسک": "خیلی کم", "نقدشوندگی": "بالا", "حداقل سرمایه": "کم", "افق مناسب": "کوتاه تا میان" },
+  "طلا / صندوق طلا": { "پوشش تورم": "خوب", "بازدهی ذاتی": "ندارد", "نوسان / ریسک": "متوسط", "نقدشوندگی": "بالا", "حداقل سرمایه": "کم", "افق مناسب": "میان تا بلند" },
+  "دلار / ارز": { "پوشش تورم": "متوسط", "بازدهی ذاتی": "ندارد", "نوسان / ریسک": "متوسط", "نقدشوندگی": "بالا", "حداقل سرمایه": "کم", "افق مناسب": "کوتاه تا میان" },
+  "سهام": { "پوشش تورم": "خوب (بلندمدت)", "بازدهی ذاتی": "رشد + سود نقدی", "نوسان / ریسک": "بالا", "نقدشوندگی": "متوسط", "حداقل سرمایه": "کم", "افق مناسب": "بلند" },
+  "صندوق سهامی / شاخصی": { "پوشش تورم": "خوب (بلندمدت)", "بازدهی ذاتی": "رشد + سود", "نوسان / ریسک": "بالا ولی متنوع", "نقدشوندگی": "بالا", "حداقل سرمایه": "کم", "افق مناسب": "بلند" },
+  "مسکن / زمین": { "پوشش تورم": "خوب", "بازدهی ذاتی": "اجاره", "نوسان / ریسک": "متوسط", "نقدشوندگی": "پایین", "حداقل سرمایه": "خیلی بالا", "افق مناسب": "بلند" },
+  "رمزارز": { "پوشش تورم": "نامطمئن", "بازدهی ذاتی": "ندارد (غالباً)", "نوسان / ریسک": "خیلی بالا", "نقدشوندگی": "بالا", "حداقل سرمایه": "کم", "افق مناسب": "بلند" },
+  "کسب‌وکار": { "پوشش تورم": "بالقوه عالی", "بازدهی ذاتی": "سود عملیاتی", "نوسان / ریسک": "خیلی بالا", "نقدشوندگی": "خیلی پایین", "حداقل سرمایه": "متغیر", "افق مناسب": "بلند" },
+};
+const duelA = document.getElementById("duelA");
+const duelB = document.getElementById("duelB");
+Object.keys(duelData).forEach((name) => {
+  duelA.insertAdjacentHTML("beforeend", "<option>" + name + "</option>");
+  duelB.insertAdjacentHTML("beforeend", "<option>" + name + "</option>");
+});
+duelA.value = "طلا / صندوق طلا";
+duelB.value = "صندوق سهامی / شاخصی";
+function renderDuel() {
+  const box = document.getElementById("duelResult");
+  box.innerHTML = "";
+  [duelA.value, duelB.value].forEach((name) => {
+    const d = duelData[name];
+    let html = '<div class="duel-col"><h4>' + name + "</h4>";
+    for (const k in d) {
+      html += '<p><span class="lbl">' + k + ":</span> " + d[k] + "</p>";
+    }
+    box.insertAdjacentHTML("beforeend", html + "</div>");
+  });
+}
+duelA.addEventListener("change", renderDuel);
+duelB.addEventListener("change", renderDuel);
+renderDuel();
