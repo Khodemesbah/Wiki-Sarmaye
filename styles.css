@@ -298,3 +298,53 @@ body.menu-open { position: fixed; width: 100%; overflow: hidden; }
 .icon-btn:focus-visible, .cta:focus-visible, .to-top:focus-visible, .nav-links a:focus-visible {
   outline: 2px solid var(--blue); outline-offset: 3px;
 }
+
+/* ===== نسخه ۷ ===== */
+#tools, #glossary { scroll-margin-top: 64px; }
+.nav-links.open a:nth-child(4) { transition-delay: 0.36s; }
+.nav-links.open a:nth-child(5) { transition-delay: 0.43s; }
+
+/* ابزارها */
+.tool-note { color: var(--muted); font-size: 0.85rem; }
+.fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+.fields label { font-size: 0.85rem; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.fields input {
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); font: inherit; width: 100%;
+}
+.fields input:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.btn {
+  background: var(--blue); color: #fff; border: none; cursor: pointer;
+  padding: 10px 26px; border-radius: 999px; font: inherit;
+  transition: transform 0.2s ease;
+}
+.btn:hover { transform: scale(1.04); }
+.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+/* نتایج ماشین‌حساب */
+.calc-results { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+.calc-row { display: grid; grid-template-columns: 150px 1fr 90px; align-items: center; gap: 10px; font-size: 0.88rem; }
+.calc-bar { height: 10px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.calc-bar i { display: block; height: 100%; border-radius: 999px; background: var(--blue); transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.calc-val.good { color: var(--good); font-weight: 600; }
+.calc-val.bad { color: var(--bad); font-weight: 600; }
+
+/* کوییز */
+.q { border: none; border-top: 1px solid var(--line); padding: 12px 0 6px; margin-top: 6px; }
+.q legend { font-weight: 600; padding-top: 12px; }
+.q label { display: block; font-size: 0.92rem; cursor: pointer; }
+.q input { margin-inline-end: 8px; accent-color: var(--blue); }
+.quiz-result { margin-top: 16px; font-weight: 600; }
+.quiz-result a { color: var(--blue); }
+
+/* واژه‌نامه */
+.glossary details {
+  background: var(--alt); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px;
+}
+.glossary summary { cursor: pointer; font-weight: 600; }
+.glossary p { color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
+
+@media (max-width: 720px) {
+  .fields { grid-template-columns: 1fr; }
+  .calc-row { grid-template-columns: 105px 1fr 80px; }
+}
