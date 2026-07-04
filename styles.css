@@ -1,0 +1,151 @@
+/* ===== ویکی‌سرمایه — طراحی به سبک اپل ===== */
+:root {
+  --bg: #ffffff;
+  --alt: #f5f5f7;
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --blue: #0071e3;
+  --good: #1a7f4f;
+  --mid: #b07c1a;
+  --bad: #c0392b;
+  --radius: 18px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Vazirmatn", "Tahoma", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 2;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== نوار بالا (شیشه‌ای مثل اپل) ===== */
+.nav {
+  position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  transition: box-shadow 0.3s ease;
+}
+.nav.scrolled { box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); }
+.nav-inner {
+  max-width: 980px; margin: 0 auto; padding: 0 22px; height: 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-weight: 800; font-size: 1.05rem; color: var(--ink); text-decoration: none; }
+.nav-links a {
+  color: #424245; text-decoration: none; font-size: 0.85rem;
+  margin-inline-start: 22px; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* ===== هیرو ===== */
+.hero {
+  min-height: 88vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 120px 22px 60px; will-change: opacity, transform;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 7vw, 4.4rem);
+  font-weight: 800; line-height: 1.35; letter-spacing: -0.02em;
+}
+.grad {
+  background: linear-gradient(90deg, #0071e3, #9333ea);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-sub {
+  color: var(--muted); font-size: clamp(1rem, 2.4vw, 1.35rem);
+  max-width: 640px; margin-top: 18px;
+}
+.cta {
+  margin-top: 30px; display: inline-block;
+  background: var(--blue); color: #fff; text-decoration: none;
+  padding: 12px 28px; border-radius: 999px; font-size: 1rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cta:hover { transform: scale(1.04); box-shadow: 0 10px 30px rgba(0, 113, 227, 0.35); }
+
+/* ===== نوار مشکی جمله کلیدی ===== */
+.band { background: #000; color: #f5f5f7; padding: 90px 22px; text-align: center; }
+.statement {
+  max-width: 760px; margin: 0 auto;
+  font-size: clamp(1.2rem, 3vw, 1.7rem); font-weight: 300;
+}
+.statement strong { color: #fff; font-weight: 800; }
+
+/* ===== بخش‌ها ===== */
+.section { max-width: 980px; margin: 0 auto; padding: 90px 22px; }
+.section-title { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; text-align: center; }
+.section-lead { color: var(--muted); text-align: center; max-width: 620px; margin: 12px auto 48px; }
+
+/* ===== کارت روش‌ها ===== */
+.card {
+  background: var(--alt); border-radius: var(--radius);
+  padding: 32px 34px; margin-bottom: 22px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08); }
+.card h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 10px; }
+.pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+.pros, .cons { background: #fff; border-radius: 12px; padding: 14px 18px; }
+.pros h4 { color: var(--good); margin-bottom: 6px; }
+.cons h4 { color: var(--bad); margin-bottom: 6px; }
+.pros ul, .cons ul { padding-inline-start: 20px; font-size: 0.92rem; }
+.fit {
+  color: var(--muted); font-size: 0.95rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08); padding-top: 12px; margin-top: 6px;
+}
+
+/* ===== جدول مقایسه ===== */
+.table-wrap {
+  overflow-x: auto; border-radius: var(--radius);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.92rem; }
+th, td { padding: 14px 16px; text-align: right; border-bottom: 1px solid #ececec; white-space: nowrap; }
+thead th { background: #fafafa; color: var(--muted); font-weight: 600; font-size: 0.8rem; }
+tbody tr { transition: background 0.2s; }
+tbody tr:hover { background: var(--alt); }
+td.good { color: var(--good); font-weight: 600; }
+td.mid { color: var(--mid); font-weight: 600; }
+td.bad { color: var(--bad); font-weight: 600; }
+
+/* ===== پیشنهادها ===== */
+.principles { padding-inline-start: 22px; margin-bottom: 42px; }
+.principles li { margin-bottom: 10px; }
+.portfolios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.portfolio {
+  background: var(--alt); border-radius: var(--radius); padding: 24px 22px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.portfolio:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08); }
+.portfolio h3 { margin-bottom: 8px; }
+.portfolio p { font-size: 0.92rem; }
+.summary { background: var(--alt); border-radius: var(--radius); padding: 26px 30px; margin-top: 26px; }
+
+/* ===== فوتر ===== */
+footer {
+  background: var(--alt); color: var(--muted);
+  text-align: center; padding: 30px 22px; font-size: 0.8rem;
+}
+
+/* ===== انیمیشن ظاهرشدن هنگام اسکرول ===== */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; opacity: 1; transform: none; }
+}
+
+/* ===== موبایل ===== */
+@media (max-width: 720px) {
+  .pros-cons { grid-template-columns: 1fr; }
+  .portfolios { grid-template-columns: 1fr; }
+  th, td { white-space: normal; }
+}
