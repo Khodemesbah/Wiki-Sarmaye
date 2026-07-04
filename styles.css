@@ -348,3 +348,44 @@ body.menu-open { position: fixed; width: 100%; overflow: hidden; }
   .fields { grid-template-columns: 1fr; }
   .calc-row { grid-template-columns: 105px 1fr 80px; }
 }
+
+/* ===== نسخه ۸ ===== */
+#scenario, #mistakes { scroll-margin-top: 64px; }
+.nav-links.open a:nth-child(6) { transition-delay: 0.5s; }
+.nav-links.open a:nth-child(7) { transition-delay: 0.57s; }
+
+/* بنر پروفایل ذخیره‌شده */
+.profile-banner {
+  position: sticky; top: 48px; z-index: 98;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: var(--alt); color: var(--ink);
+  padding: 9px 16px; font-size: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+.profile-banner a { color: var(--blue); text-decoration: none; font-weight: 600; }
+.profile-banner button {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; font-size: 0.9rem; padding: 2px 6px;
+}
+.profile-banner button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* مقایسه‌گر رو در رو */
+.duel-fields { grid-template-columns: 1fr 1fr; }
+.fields select {
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); font: inherit; width: 100%;
+}
+.fields select:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.duel { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.duel-col { background: var(--alt); border-radius: 12px; padding: 16px 18px; }
+.duel-col h4 { margin-bottom: 10px; }
+.duel-col p { font-size: 0.88rem; margin: 5px 0; }
+.duel-col .lbl { color: var(--muted); }
+
+/* هفت اشتباه */
+.mistakes { max-width: 760px; margin: 0 auto; padding-inline-start: 22px; }
+.mistakes li { margin-bottom: 14px; line-height: 1.9; }
+
+@media (max-width: 720px) {
+  .duel, .duel-fields { grid-template-columns: 1fr; }
+}
