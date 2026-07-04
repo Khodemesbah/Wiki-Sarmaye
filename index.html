@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ویکی‌سرمایه | راهنمای کامل سرمایه‌گذاری</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<!-- عدد v را با هر آپدیت یکی زیاد کنید تا کش مرورگر باطل شود -->
+<meta name="theme-color" content="#ffffff" id="metaTheme">
+<link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
+
+<div class="progress" id="progress"></div>
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
@@ -166,9 +170,15 @@
 <li><strong>حباب و NAV را چک کنید:</strong> در صندوق طلا و ETFها، خرید بالاتر از ارزش واقعی یعنی زیان قطعی از لحظه صفر.</li>
 </ol>
 <div class="portfolios">
-<div class="portfolio reveal"><h3>محافظه‌کار</h3><p>۵۰٪ درآمد ثابت · ۳۰٪ طلا · ۲۰٪ صندوق سهامی</p><p><strong>چرا:</strong> اولویت با حفظ اصل پول است؛ طلا پوشش تورم می‌دهد و سهم کوچک سهام، رشد ملایم بدون استرس.</p></div>
-<div class="portfolio reveal"><h3>متعادل</h3><p>۲۵٪ درآمد ثابت · ۳۰٪ طلا · ۳۵٪ سهام/شاخصی · ۱۰٪ دلار/رمزارز</p><p><strong>چرا:</strong> تعادل بین پوشش تورم و مشارکت در رشد؛ برای اکثر افراد با افق ۳ تا ۷ سال منطقی‌ترین نقطه شروع.</p></div>
-<div class="portfolio reveal"><h3>تهاجمی</h3><p>۱۰٪ درآمد ثابت · ۲۰٪ طلا · ۵۰٪ سهام · ۲۰٪ رمزارز</p><p><strong>چرا:</strong> حداکثر بازدهی برای افق بالای ۷ سال و تحمل افت‌های سنگین؛ فقط با درآمد پایدار و اعصاب قوی.</p></div>
+<div class="portfolio reveal"><h3>محافظه‌کار</h3>
+<div class="donut" style="background: conic-gradient(#34c759 0 50%, #ff9f0a 50% 80%, #0071e3 80% 100%);"></div>
+<p class="alloc"><span class="dot" style="background:#34c759"></span>۵۰٪ درآمد ثابت <span class="dot" style="background:#ff9f0a"></span>۳۰٪ طلا <span class="dot" style="background:#0071e3"></span>۲۰٪ صندوق سهامی</p><p><strong>چرا:</strong> اولویت با حفظ اصل پول است؛ طلا پوشش تورم می‌دهد و سهم کوچک سهام، رشد ملایم بدون استرس.</p></div>
+<div class="portfolio reveal"><h3>متعادل</h3>
+<div class="donut" style="background: conic-gradient(#34c759 0 25%, #ff9f0a 25% 55%, #0071e3 55% 90%, #af52de 90% 100%);"></div>
+<p class="alloc"><span class="dot" style="background:#34c759"></span>۲۵٪ درآمد ثابت <span class="dot" style="background:#ff9f0a"></span>۳۰٪ طلا <span class="dot" style="background:#0071e3"></span>۳۵٪ سهام/شاخصی <span class="dot" style="background:#af52de"></span>۱۰٪ دلار/رمزارز</p><p><strong>چرا:</strong> تعادل بین پوشش تورم و مشارکت در رشد؛ برای اکثر افراد با افق ۳ تا ۷ سال منطقی‌ترین نقطه شروع.</p></div>
+<div class="portfolio reveal"><h3>تهاجمی</h3>
+<div class="donut" style="background: conic-gradient(#34c759 0 10%, #ff9f0a 10% 30%, #0071e3 30% 80%, #af52de 80% 100%);"></div>
+<p class="alloc"><span class="dot" style="background:#34c759"></span>۱۰٪ درآمد ثابت <span class="dot" style="background:#ff9f0a"></span>۲۰٪ طلا <span class="dot" style="background:#0071e3"></span>۵۰٪ سهام <span class="dot" style="background:#af52de"></span>۲۰٪ رمزارز</p><p><strong>چرا:</strong> حداکثر بازدهی برای افق بالای ۷ سال و تحمل افت‌های سنگین؛ فقط با درآمد پایدار و اعصاب قوی.</p></div>
 </div>
 <div class="summary reveal"><p><strong>جمع‌بندی:</strong> هیچ روشی به‌تنهایی کامل نیست. درآمد ثابت آرامش می‌دهد، طلا قدرت خرید را نگه می‌دارد، سهام ثروت می‌سازد. ترکیب این سه متناسب با افق و تحمل ریسک شما، کل بازی است.</p></div>
 </section>
@@ -178,6 +188,8 @@
 <p>ویکی‌سرمایه · محتوای این صفحه آموزشی است و توصیه مالی شخصی محسوب نمی‌شود.</p>
 </footer>
 
-<script src="script.js"></script>
+<button class="to-top" id="toTop" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg></button>
+
+<script src="script.js?v=4"></script>
 </body>
 </html>
