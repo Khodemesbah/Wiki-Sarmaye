@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ویکی‌سرمایه | راهنمای کامل سرمایه‌گذاری</title>
+<!-- SEO و پیش‌نمایش در شبکه‌های اجتماعی -->
+<meta name="description" content="مقایسه ۹ روش رایج سرمایه‌گذاری در ایران با معیار بازدهی واقعی — سازوکار، مزایا و معایب، جدول مقایسه، پرتفوی پیشنهادی، ماشین‌حساب و واژه‌نامه.">
+<meta property="og:title" content="ویکی‌سرمایه | راهنمای کامل سرمایه‌گذاری">
+<meta property="og:description" content="۹ روش سرمایه‌گذاری در یک نگاه: سازوکار، مزایا، معایب و پیشنهاد عملی.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://khodemesbah.github.io/Wiki-Sarmaye/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -17,7 +25,7 @@
   if (t) document.documentElement.setAttribute("data-theme", t);
 })();
 </script>
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 
@@ -42,7 +50,9 @@
 <div class="nav-links" id="menu">
   <a href="#methods"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>روش‌های سرمایه‌گذاری</a>
   <a href="#compare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10M15 10v10"/></svg>جدول مقایسه</a>
+  <a href="#tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h.01M12 11h.01M15 11h.01M9 15h.01M12 15h.01M15 15h.01"/></svg>ابزارها</a>
   <a href="#advice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.6 1 1.5 1 2.5h6c0-1 .3-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>پیشنهادها و دلایل</a>
+  <a href="#glossary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>واژه‌نامه</a>
 </div>
 
 <header class="hero" id="top">
@@ -172,6 +182,55 @@
 </div>
 </section>
 
+<section id="tools" class="section">
+<h2 class="section-title reveal">ابزارها</h2>
+<p class="section-lead reveal">به‌جای حدس، عدد: قدرت خرید آینده پول‌تان را ببینید و پروفایل ریسک‌تان را بشناسید.</p>
+
+<div class="tool card reveal">
+  <h3>ماشین‌حساب بازدهی واقعی</h3>
+  <p class="tool-note">نرخ‌های اسمی سالانه، فرض‌های ساده‌شده هستند و قطعیت ندارند؛ هدف، مقایسه نسبی روش‌هاست نه پیش‌بینی.</p>
+  <div class="fields">
+    <label>مبلغ (میلیون تومان)<input type="number" id="calcAmount" value="100" min="1"></label>
+    <label>افق (سال)<input type="number" id="calcYears" value="5" min="1" max="30"></label>
+    <label>تورم سالانه (٪)<input type="number" id="calcInflation" value="35" min="0" max="100"></label>
+  </div>
+  <button class="btn" id="calcRun">محاسبه کن</button>
+  <div class="calc-results" id="calcResults"></div>
+</div>
+
+<div class="tool card reveal">
+  <h3>کوییز پروفایل ریسک</h3>
+  <p class="tool-note">۵ سؤال، ۳۰ ثانیه — خروجی: یکی از سه پرتفوی پیشنهادی.</p>
+  <fieldset class="q"><legend>۱. این پول را کی لازم دارید؟</legend>
+    <label><input type="radio" name="q1" value="1"> زیر ۲ سال</label>
+    <label><input type="radio" name="q1" value="2"> ۲ تا ۷ سال</label>
+    <label><input type="radio" name="q1" value="3"> بالای ۷ سال</label>
+  </fieldset>
+  <fieldset class="q"><legend>۲. اگر سرمایه‌تان ۳۰٪ افت کند چه می‌کنید؟</legend>
+    <label><input type="radio" name="q2" value="1"> می‌فروشم تا بیشتر ضرر نکنم</label>
+    <label><input type="radio" name="q2" value="2"> صبر می‌کنم تا برگردد</label>
+    <label><input type="radio" name="q2" value="3"> در قیمت پایین‌تر بیشتر می‌خرم</label>
+  </fieldset>
+  <fieldset class="q"><legend>۳. وضعیت درآمدتان؟</legend>
+    <label><input type="radio" name="q3" value="1"> نامنظم یا در معرض ریسک</label>
+    <label><input type="radio" name="q3" value="2"> ثابت، بدون پس‌انداز منظم</label>
+    <label><input type="radio" name="q3" value="3"> ثابت با پس‌انداز ماهانه</label>
+  </fieldset>
+  <fieldset class="q"><legend>۴. تجربه سرمایه‌گذاری؟</legend>
+    <label><input type="radio" name="q4" value="1"> هیچ</label>
+    <label><input type="radio" name="q4" value="2"> کمی (صندوق یا طلا خریده‌ام)</label>
+    <label><input type="radio" name="q4" value="3"> فعال بازار هستم</label>
+  </fieldset>
+  <fieldset class="q"><legend>۵. هدف اصلی؟</legend>
+    <label><input type="radio" name="q5" value="1"> فقط حفظ قدرت خرید</label>
+    <label><input type="radio" name="q5" value="2"> رشد متعادل با ریسک قابل تحمل</label>
+    <label><input type="radio" name="q5" value="3"> حداکثر رشد، ریسکش را می‌پذیرم</label>
+  </fieldset>
+  <button class="btn" id="quizRun">نتیجه</button>
+  <p class="quiz-result" id="quizResult"></p>
+</div>
+</section>
+
 <section id="advice" class="section">
 <h2 class="section-title reveal">پیشنهادها و دلایل</h2>
 <ol class="principles reveal">
@@ -194,6 +253,25 @@
 </div>
 <div class="summary reveal"><p><strong>جمع‌بندی:</strong> هیچ روشی به‌تنهایی کامل نیست. درآمد ثابت آرامش می‌دهد، طلا قدرت خرید را نگه می‌دارد، سهام ثروت می‌سازد. ترکیب این سه متناسب با افق و تحمل ریسک شما، کل بازی است.</p></div>
 </section>
+
+<section id="glossary" class="section">
+<h2 class="section-title reveal">واژه‌نامه</h2>
+<p class="section-lead reveal">اصطلاحات این راهنما — کوتاه و بدون پیچیدگی.</p>
+<div class="glossary reveal">
+<details><summary>بازدهی واقعی (Real Return)</summary><p>بازدهی اسمی منهای تورم؛ تنها عددی که رشد یا آب‌رفتن قدرت خرید شما را نشان می‌دهد.</p></details>
+<details><summary>NAV (ارزش خالص دارایی)</summary><p>ارزش کل دارایی‌های صندوق تقسیم بر تعداد واحدها؛ قیمت منصفانه هر واحد.</p></details>
+<details><summary>حباب صندوق</summary><p>فاصله قیمت تابلو با NAV؛ حباب مثبت یعنی برای هر واحد بیشتر از ارزش واقعی‌اش می‌پردازید.</p></details>
+<details><summary>ETF (صندوق قابل معامله)</summary><p>صندوقی که واحدهایش مثل سهم در بورس لحظه‌ای خرید و فروش می‌شود.</p></details>
+<details><summary>صندوق شاخصی (Index Fund)</summary><p>صندوقی که بدون تحلیل، ترکیب شاخص را کپی می‌کند؛ کارمزد کمتر و حذف ریسک اشتباه مدیر.</p></details>
+<details><summary>خرید پله‌ای (DCA)</summary><p>خرید با مبلغ ثابت در فواصل منظم؛ ریسک ورود در سقف قیمت را حذف می‌کند.</p></details>
+<details><summary>نکول (Default)</summary><p>ناتوانی ناشر اوراق از پرداخت سود یا اصل پول در سررسید.</p></details>
+<details><summary>بازارگردان (Market Maker)</summary><p>نهادی که با سفارش دائمی خرید و فروش، نقدشوندگی را حفظ و قیمت را به NAV نزدیک نگه می‌دارد.</p></details>
+<details><summary>استیبل‌کوین (Stablecoin)</summary><p>رمزارزی با پشتوانه دلاری که قیمتش حوالی یک دلار می‌ماند؛ مثل تتر.</p></details>
+<details><summary>صندوق املاک (REIT)</summary><p>مالکیت خرد ملک از طریق بورس؛ بازدهی ملک بدون نیاز به سرمایه سنگین.</p></details>
+<details><summary>سجام و کد بورسی</summary><p>ثبت‌نام یکپارچه سجام + کد بورسی، پیش‌نیاز هر معامله در بورس ایران است.</p></details>
+<details><summary>نقدشوندگی (Liquidity)</summary><p>سرعت و سهولت تبدیل دارایی به پول نقد بدون افت قیمت.</p></details>
+</div>
+</section>
 </main>
 
 <footer>
@@ -202,6 +280,6 @@
 
 <button class="to-top" id="toTop" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg></button>
 
-<script src="script.js?v=6"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>
